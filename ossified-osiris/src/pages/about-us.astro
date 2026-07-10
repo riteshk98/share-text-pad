@@ -1,0 +1,36 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+---
+
+<Layout
+  title="About Us - Share Text Pad"
+  description="Learn about Share Text Pad and our mission to make collaborative note sharing simple, fast, and accessible."
+>
+  <div class="min-h-screen overflow-x-hidden">
+    <Navbar />
+    <main id="main-content" class="mx-auto w-full max-w-4xl px-4 py-10 sm:px-6 lg:px-8">
+      <section class="rounded-2xl border border-zinc-200 bg-white/85 p-6 text-zinc-700 shadow-[0_24px_80px_-52px_rgba(0,0,0,0.55)] dark:border-zinc-800 dark:bg-zinc-900/85 dark:text-zinc-300 sm:p-8">
+        <h1 class="text-3xl font-semibold tracking-tight text-zinc-950 dark:text-zinc-100">About Us</h1>
+        <div class="mt-5 space-y-4 text-sm leading-7 sm:text-base">
+          <p>
+            Share Text Pad was created to solve a simple problem: people need a fast way to write together and share notes online
+            without friction. Most tools are either too heavy for quick collaboration or too limited for practical team use.
+          </p>
+          <p>
+            We built Share Text Pad as a focused online notepad for real-time collaboration. You can create a note instantly,
+            share it using a link or QR flow, and edit with others live. There is no complicated onboarding, and the interface
+            stays clean so teams can focus on content instead of setup.
+          </p>
+          <p>
+            Our goal is to keep collaboration simple, dependable, and accessible across desktop and mobile browsers. We continue
+            improving performance, editing experience, and reliability so Share Text Pad remains useful for students, teams,
+            creators, and anyone who needs to move ideas quickly.
+          </p>
+        </div>
+      </section>
+    </main>
+    <SiteFooter />
+  </div>
+</Layout>

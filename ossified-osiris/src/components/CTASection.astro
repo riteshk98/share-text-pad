@@ -1,0 +1,21 @@
+---
+import Button from './ui/Button.astro';
+import { CreateNoteButton } from './CreateNoteButton';
+---
+
+<section id="launch" class="px-4 pb-24 pt-16 sm:px-6 lg:px-8">
+  <div class="mx-auto max-w-5xl overflow-hidden rounded-3xl border border-zinc-200/80 bg-white/90 p-10 text-center shadow-[0_34px_100px_-55px_rgba(0,0,0,0.6)] dark:border-zinc-700 dark:bg-zinc-900/90 sm:p-12">
+    <div class="pointer-events-none mx-auto mb-6 h-px w-40 bg-gradient-to-r from-transparent via-sky-500/80 to-transparent"></div>
+    <h2 class="text-balance text-3xl font-semibold tracking-[-0.03em] text-zinc-950 sm:text-4xl dark:text-zinc-100">
+      Launch Your Next Shared Note In Seconds
+    </h2>
+    <p class="mx-auto mt-4 max-w-2xl text-balance text-base leading-7 text-zinc-600 dark:text-zinc-400">
+      Turn ideas into momentum with instant collaboration, frictionless sharing, and a writing experience that feels fast on every device.
+    </p>
+
+    <div class="mt-8 flex flex-wrap justify-center gap-3">
+      <CreateNoteButton client:load />
+      <Button size="lg" variant="secondary" href="#features">View Features</Button>
+    </div>
+  </div>
+</section>

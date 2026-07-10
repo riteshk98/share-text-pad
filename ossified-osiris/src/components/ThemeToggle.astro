@@ -1,0 +1,53 @@
+<button
+  id="theme-toggle"
+  class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-zinc-300/80 bg-white/80 text-zinc-700 transition-colors duration-200 hover:border-zinc-400 hover:text-zinc-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500/80 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:border-zinc-700 dark:bg-zinc-900/80 dark:text-zinc-300 dark:hover:border-zinc-600 dark:hover:text-zinc-100 dark:focus-visible:ring-offset-zinc-950 motion-reduce:transition-none"
+  aria-label="Toggle Dark Mode"
+  title="Theme: System"
+>
+  <span class="theme-icon-sun hidden" aria-hidden="true">☀</span>
+  <span class="theme-icon-moon hidden" aria-hidden="true">☾</span>
+  <span class="theme-icon-system hidden" aria-hidden="true">◐</span>
+</button>
+
+<script is:inline>
+  (() => {
+    const button = document.getElementById('theme-toggle');
+    const sun = button?.querySelector('.theme-icon-sun');
+    const moon = button?.querySelector('.theme-icon-moon');
+    const system = button?.querySelector('.theme-icon-system');
+
+    const getThemeApi = () => window.__theme;
+
+    const render = (preference, resolved) => {
+      sun?.classList.toggle('hidden', preference !== 'light');
+      moon?.classList.toggle('hidden', preference !== 'dark');
+      system?.classList.toggle('hidden', preference !== 'system');
+
+      if (button) {
+        const label = preference === 'system' ? `System (${resolved})` : preference;
+        button.setAttribute('title', `Theme: ${label}`);
+        button.setAttribute('aria-label', `Toggle Theme (${label})`);
+      }
+    };
+
+    const readCurrent = () => {
+      const root = document.documentElement;
+      const preference = root.getAttribute('data-theme-preference') || 'system';
+      const resolved = root.getAttribute('data-theme') || 'light';
+      return { preference, resolved };
+    };
+
+    render(readCurrent().preference, readCurrent().resolved);
+
+    button?.addEventListener('click', () => {
+      const { preference: current } = readCurrent();
+      const next = current === 'dark' ? 'light' : current === 'light' ? 'system' : 'dark';
+      getThemeApi()?.applyThemePreference(next, true);
+    });
+
+    window.addEventListener('theme-change', (event) => {
+      const detail = event.detail || {};
+      render(detail.preference || 'system', detail.resolved || 'light');
+    });
+  })();
+</script>

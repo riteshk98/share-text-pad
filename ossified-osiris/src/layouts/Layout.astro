@@ -1,0 +1,111 @@
+---
+import '../styles/global.css';
+import SEO from '../components/SEO.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article' | 'product';
+  noindex?: boolean;
+}
+
+const {
+  title = 'Share Text Pad - Real-Time Collaborative Notepad',
+  description = 'A fast, modern collaborative notepad with real-time editing, QR sharing, and version history.',
+  ogImage = '/og-image.png',
+  ogType = 'website',
+  noindex = false,
+} = Astro.props as Props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<SEO 
+			title={title}
+			description={description}
+			ogImage={ogImage}
+			ogType={ogType}
+			noindex={noindex}
+		/>
+		
+		<!-- Font Stylesheet -->
+		<link
+			href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+			rel="stylesheet"
+		/>
+		
+		<script is:inline>
+			(() => {
+				const root = document.documentElement;
+				const storageKey = 'theme';
+				const media = window.matchMedia('(prefers-color-scheme: dark)');
+				const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+
+				const getStoredPreference = () => {
+					const stored = localStorage.getItem(storageKey);
+					if (stored === 'light' || stored === 'dark' || stored === 'system') {
+						return stored;
+					}
+					return 'system';
+				};
+
+				const resolveTheme = (preference) => {
+					if (preference === 'system') {
+						return media.matches ? 'dark' : 'light';
+					}
+					return preference;
+				};
+
+				const applyThemePreference = (preference, persist = false) => {
+					const resolved = resolveTheme(preference);
+					root.classList.toggle('dark', resolved === 'dark');
+					root.style.colorScheme = resolved;
+					root.setAttribute('data-theme-preference', preference);
+					root.setAttribute('data-theme', resolved);
+
+					if (themeColorMeta) {
+						themeColorMeta.setAttribute('content', resolved === 'dark' ? '#0a0a0a' : '#ffffff');
+					}
+
+					if (persist) {
+						localStorage.setItem(storageKey, preference);
+					}
+
+					window.dispatchEvent(
+						new CustomEvent('theme-change', {
+							detail: {
+								preference,
+								resolved,
+							},
+						}),
+					);
+				};
+
+				window.__theme = {
+					getPreference: getStoredPreference,
+					applyThemePreference,
+				};
+
+				applyThemePreference(getStoredPreference(), false);
+
+				media.addEventListener('change', () => {
+					if (getStoredPreference() === 'system') {
+						applyThemePreference('system', false);
+					}
+				});
+
+				requestAnimationFrame(() => {
+					root.classList.add('theme-transition-ready');
+				});
+			})();
+		</script>
+	</head>
+	<body class="text-zinc-900 antialiased dark:text-zinc-100">
+		<a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-white focus:px-3 focus:py-2 focus:text-sm focus:text-zinc-900 dark:focus:bg-zinc-900 dark:focus:text-zinc-100">
+			Skip to Content
+		</a>
+		<slot />
+	</body>
+</html>

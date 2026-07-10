@@ -1,0 +1,30 @@
+---
+interface Props {
+  eyebrow?: string;
+  title: string;
+  description: string;
+  centered?: boolean;
+}
+
+const {
+  eyebrow = 'Why Share Text Pad',
+  title,
+  description,
+  centered = false,
+} = Astro.props as Props;
+---
+
+<div class:list={[
+  'max-w-2xl space-y-4',
+  { 'mx-auto text-center': centered }
+]}>
+  <p class="inline-flex rounded-full border border-zinc-300/80 bg-white/70 px-3 py-1 text-xs font-medium tracking-wide text-zinc-700 dark:border-zinc-700 dark:bg-zinc-900/70 dark:text-zinc-300">
+    {eyebrow}
+  </p>
+  <h2 class="text-pretty text-3xl font-semibold tracking-[-0.03em] text-zinc-950 sm:text-4xl dark:text-zinc-100">
+    {title}
+  </h2>
+  <p class="text-balance text-base leading-7 text-zinc-600 dark:text-zinc-400">
+    {description}
+  </p>
+</div>

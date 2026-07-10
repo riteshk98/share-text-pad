@@ -1,0 +1,56 @@
+---
+import FeatureCard from './FeatureCard.astro';
+import SectionHeading from './ui/SectionHeading.astro';
+
+const features = [
+  {
+    icon: '📱',
+    title: 'QR Sharing',
+    description:
+      'Generate a scannable QR in one tap so nearby teammates can join the same note instantly, without typing long links.',
+    badge: 'Fast Handoff',
+    featured: true,
+  },
+  {
+    icon: '⚡',
+    title: 'Real-Time Collaboration',
+    description:
+      'See edits, cursors, and selections from multiple people at once with low-latency updates that keep every collaborator in sync.',
+    badge: 'Live',
+    featured: true,
+  },
+  {
+    icon: '🧠',
+    title: 'Structured Drafting',
+    description:
+      'Use quick templates for meeting notes, launch plans, and brainstorm sessions so teams start with clarity and momentum.',
+    badge: 'Templates',
+  },
+  {
+    icon: '🛰',
+    title: 'Session Recovery',
+    description:
+      'Drop offline for a moment and continue typing. Share Text Pad gracefully syncs changes when connectivity returns.',
+    badge: 'Resilient',
+  },
+];
+---
+
+<section id="features" class="px-4 py-20 sm:px-6 lg:px-8">
+  <div class="mx-auto max-w-6xl space-y-10">
+    <SectionHeading
+      centered={true}
+      eyebrow="Features"
+      title="Everything Needed For High-Speed Collaborative Writing"
+      description="Designed for hackathons, classrooms, standups, and product teams that need instant alignment without heavyweight tooling."
+    />
+
+    <div class="grid gap-4 md:grid-cols-2">
+      {features.map((feature, index) => (
+        <div class:list={['reveal-up', { '[animation-delay:120ms]': index % 2 === 1 }]}>
+          <FeatureCard {...feature} />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,24 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Button from '../components/ui/Button.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+---
+
+<Layout title="Page Not Found - Share Text Pad" description="The page you're looking for doesn't exist." noindex={true}>
+  <div class="min-h-screen overflow-x-hidden">
+    <Navbar />
+    <main id="main-content" class="mx-auto flex w-full max-w-6xl items-center justify-center px-4 py-20 sm:px-6 lg:px-8">
+      <div class="w-full max-w-xl rounded-2xl border border-zinc-200 bg-white/85 p-8 text-center shadow-[0_24px_80px_-52px_rgba(0,0,0,0.55)] dark:border-zinc-800 dark:bg-zinc-900/85">
+        <h1 class="text-6xl font-bold text-zinc-950 dark:text-zinc-100">404</h1>
+        <p class="mt-4 text-xl text-zinc-600 dark:text-zinc-400">Page not found</p>
+        <p class="mt-2 text-base text-zinc-500 dark:text-zinc-500">The page you're looking for doesn't exist or has been moved.</p>
+        <div class="mt-8 flex justify-center gap-4">
+          <Button href="/">Return to Home</Button>
+          <Button href="/create" variant="secondary">Create a Note</Button>
+        </div>
+      </div>
+    </main>
+    <SiteFooter />
+  </div>
+</Layout>

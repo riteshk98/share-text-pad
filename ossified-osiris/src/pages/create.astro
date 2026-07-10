@@ -1,0 +1,21 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { createDocument } from '../services/documentApi';
+
+let documentId: string | undefined;
+
+try {
+	const document = await createDocument({ content: '<p></p>' });
+	documentId = document.id;
+} catch {
+	return Astro.redirect('/?createError=1');
+}
+
+if (!documentId) {
+	return Astro.redirect('/?createError=1');
+}
+
+return Astro.redirect(`/notes/${documentId}`);
+---
+
+<Layout title="Creating Note - Share Text Pad" description="Creating your note..." />

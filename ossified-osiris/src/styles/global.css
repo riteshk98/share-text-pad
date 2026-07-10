@@ -1,0 +1,218 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+	--font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+	--font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+:root {
+	color-scheme: light;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+html,
+body {
+	transition:
+		background-color 260ms ease,
+		color 260ms ease;
+}
+
+html.theme-transition-ready * {
+	transition-property: background-color, border-color, color, fill, stroke, box-shadow;
+	transition-duration: 260ms;
+	transition-timing-function: ease;
+}
+
+body {
+	min-height: 100vh;
+	margin: 0;
+	font-family: var(--font-sans);
+	background:
+		radial-gradient(1100px 500px at 50% -15%, rgba(14, 165, 233, 0.22), transparent 60%),
+		radial-gradient(900px 460px at 88% 0%, rgba(217, 70, 239, 0.18), transparent 65%),
+		radial-gradient(700px 320px at 8% 12%, rgba(34, 211, 238, 0.16), transparent 65%),
+		#fafafa;
+}
+
+html.dark {
+	color-scheme: dark;
+}
+
+.dark body {
+	background:
+		radial-gradient(1100px 560px at 50% -10%, rgba(14, 165, 233, 0.2), transparent 60%),
+		radial-gradient(900px 500px at 84% 0%, rgba(217, 70, 239, 0.16), transparent 65%),
+		radial-gradient(800px 400px at 8% 10%, rgba(34, 211, 238, 0.14), transparent 65%),
+		#09090b;
+}
+
+.hero-mesh {
+	background: conic-gradient(
+		from 120deg,
+		rgba(0, 124, 240, 0.52),
+		rgba(121, 40, 202, 0.45),
+		rgba(255, 0, 128, 0.45),
+		rgba(249, 203, 40, 0.42),
+		rgba(0, 223, 216, 0.5),
+		rgba(0, 124, 240, 0.52)
+	);
+}
+
+.reveal-up {
+	animation: revealUp 720ms cubic-bezier(0.2, 0.7, 0.1, 1) both;
+}
+
+@keyframes revealUp {
+	from {
+		opacity: 0;
+		transform: translate3d(0, 18px, 0);
+	}
+	to {
+		opacity: 1;
+		transform: translate3d(0, 0, 0);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+
+	html,
+	body,
+	html.theme-transition-ready * {
+		transition: none !important;
+	}
+
+	.reveal-up {
+		animation: none;
+	}
+}
+
+.tiptap {
+	min-height: 360px;
+}
+
+.tiptap h1,
+.tiptap h2 {
+	line-height: 1.2;
+	margin: 1rem 0 0.6rem;
+	font-weight: 700;
+	color: #09090b;
+}
+
+.tiptap h1 {
+	font-size: 1.9rem;
+	letter-spacing: -0.02em;
+}
+
+.tiptap h2 {
+	font-size: 1.45rem;
+	letter-spacing: -0.015em;
+}
+
+.dark .tiptap h1,
+.dark .tiptap h2 {
+	color: #fafafa;
+}
+
+.tiptap ul,
+.tiptap ol {
+	margin: 0.75rem 0;
+	padding-left: 1.5rem;
+}
+
+.tiptap ul {
+	list-style: disc;
+}
+
+.tiptap ol {
+	list-style: decimal;
+}
+
+.tiptap li {
+	margin: 0.2rem 0;
+}
+
+.tiptap li p {
+	margin: 0;
+}
+
+.tiptap code {
+	font-family: var(--font-mono);
+	font-size: 0.875em;
+	background: #f4f4f5;
+	color: #27272a;
+	padding: 0.12rem 0.38rem;
+	border-radius: 0.35rem;
+}
+
+.dark .tiptap code {
+	background: #27272a;
+	color: #e4e4e7;
+}
+
+.tiptap p.is-editor-empty:first-child::before {
+	color: #71717a;
+	content: attr(data-placeholder);
+	float: left;
+	height: 0;
+	pointer-events: none;
+}
+
+.tiptap pre {
+	border-radius: 0.75rem;
+	background: #18181b;
+	color: #f4f4f5;
+	font-family: var(--font-mono);
+	font-size: 0.875rem;
+	padding: 0.875rem;
+}
+
+.tiptap table {
+	border-collapse: collapse;
+	width: 100%;
+	margin: 1rem 0;
+}
+
+.tiptap table td,
+.tiptap table th {
+	border: 1px solid #d4d4d8;
+	padding: 0.5rem;
+	vertical-align: top;
+}
+
+.dark .tiptap table td,
+.dark .tiptap table th {
+	border-color: #3f3f46;
+}
+
+.collaboration-caret {
+	position: relative;
+	border-left: 2px solid;
+	margin-left: -1px;
+	margin-right: -1px;
+	pointer-events: none;
+}
+
+.collaboration-caret-label {
+	position: absolute;
+	top: -1.4em;
+	left: -1px;
+	padding: 2px 6px;
+	border-radius: 9999px;
+	color: #fff;
+	font-size: 10px;
+	line-height: 1;
+	white-space: nowrap;
+	font-weight: 600;
+}
+
+.collaboration-caret-selection {
+	border-radius: 2px;
+}

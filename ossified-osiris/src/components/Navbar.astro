@@ -1,0 +1,46 @@
+---
+import { CreateNoteButton } from './CreateNoteButton';
+import ThemeToggle from './ThemeToggle.astro';
+
+const pathname = Astro.url.pathname;
+const isNotesPage = pathname.startsWith('/notes/');
+const isHomePage = pathname === '/';
+---
+
+<header class="sticky top-0 z-30 border-b border-zinc-200/70 bg-white/75 backdrop-blur-xl dark:border-zinc-800 dark:bg-zinc-950/75">
+  <nav class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8" aria-label="Main Navigation">
+    <a href="/" class="inline-flex items-center gap-2 text-zinc-950 dark:text-zinc-100">
+      <img
+        src="/favicon-96x96.png"
+        alt="Share Text Pad logo"
+        width="20"
+        height="20"
+        class="h-5 w-5 rounded-sm"
+        loading="eager"
+        decoding="async"
+      />
+      <span class="text-sm font-semibold tracking-tight">Share Text Pad</span>
+    </a>
+
+    {isHomePage && (
+      <div class="hidden items-center gap-7 text-sm text-zinc-600 md:flex dark:text-zinc-400">
+        <a class="transition-colors duration-200 hover:text-zinc-950 dark:hover:text-zinc-100" href="#features">Features</a>
+        <a class="transition-colors duration-200 hover:text-zinc-950 dark:hover:text-zinc-100" href="#launch">Launch</a>
+      </div>
+    )}
+
+    {!isHomePage && !isNotesPage && (
+      <div class="hidden items-center gap-5 text-sm text-zinc-600 md:flex dark:text-zinc-400">
+        <a class="transition-colors duration-200 hover:text-zinc-950 dark:hover:text-zinc-100" href="/about-us">About Us</a>
+        <a class="transition-colors duration-200 hover:text-zinc-950 dark:hover:text-zinc-100" href="/privacy-policy">Privacy Policy</a>
+        <a class="transition-colors duration-200 hover:text-zinc-950 dark:hover:text-zinc-100" href="/terms-and-conditions">Terms</a>
+        <a class="transition-colors duration-200 hover:text-zinc-950 dark:hover:text-zinc-100" href="/contact-us">Contact</a>
+      </div>
+    )}
+
+    <div class="flex items-center gap-2">
+      <ThemeToggle />
+      <CreateNoteButton client:load compact />
+    </div>
+  </nav>
+</header>
